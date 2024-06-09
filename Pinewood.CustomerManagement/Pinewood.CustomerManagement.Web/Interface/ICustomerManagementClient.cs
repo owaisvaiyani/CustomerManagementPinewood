@@ -11,5 +11,7 @@ namespace Pinewood.CustomerManagement.Web.Interface
         Task<bool> AddCustomerAsync(CustomerDto addCustomer);
 
         Task<bool> DeleteCustomerAsync(int customerId);
+
+        Task<CustomerDto?> GetCustomerAsync(int customerId);
     }
 }

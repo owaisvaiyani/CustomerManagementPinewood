@@ -57,10 +57,10 @@ namespace Pinewood.CustomerManagement.Web.Services
 
         public async Task<bool> DeleteCustomerAsync(int customerId)
         {
-            var json = JsonConvert.SerializeObject(customerId);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            //var json = JsonConvert.SerializeObject(customerId);
+            //var data = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync(url + "/DeleteCustomer", data);
+            var response = await client.DeleteAsync(url + "/DeleteCustomer?customerId=" + customerId);
 
             if (response.IsSuccessStatusCode)
             {
@@ -69,6 +69,19 @@ namespace Pinewood.CustomerManagement.Web.Services
             }
 
             return false;
+        }
+
+        public async Task<CustomerDto?> GetCustomerAsync(int customerId) 
+        {
+            var response = await client.GetAsync(url + "/GetCustomer?customerId="+ customerId);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var responseString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<CustomerDto>(responseString);
+            }
+
+            return null;
         }
     }
 }

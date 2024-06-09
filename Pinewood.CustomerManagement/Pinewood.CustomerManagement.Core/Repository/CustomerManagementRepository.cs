@@ -59,5 +59,17 @@ namespace Pinewood.CustomerManagement.Core.Repository
         {
             return _customerContext.Customers;
         }
+
+        public Customer? GetCustomer(int customerId)
+        {
+            var findCustomer = _customerContext.Customers.Where(x => x.Id == customerId).FirstOrDefault();
+
+            if (findCustomer != null)
+            {
+                return findCustomer;
+            }
+
+            return null;
+        }
     }
 }

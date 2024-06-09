@@ -11,5 +11,6 @@ namespace Pinewood.CustomerManagement.API.Interface
         bool AddCustomer(CustomerDto addCustomer);
 
         bool DeleteCustomer(int customerId);
+        CustomerDto? GetCustomer(int customerId);
     }
 }

@@ -30,18 +30,42 @@ namespace Pinewood.CustomerManagement.Web.Controllers
             return View(customer);
         }
 
-        public async Task<IActionResult> Edit()
+        [HttpPost]
+        public async Task<IActionResult> CreateCustomer(CustomerDto newCustomer)
         {
-            var customer = new CustomerDto();
+            var result = await _customerManagementClient.AddCustomerAsync(newCustomer);
+
+            return RedirectToAction("Index", "Customer", new { area = "" });
+        }
+
+        public async Task<IActionResult> Edit(int customerId)
+        {
+            var customer = await _customerManagementClient.GetCustomerAsync(customerId);
 
             return View(customer);
         }
 
-        public async Task<IActionResult> Delete()
+        [HttpPost]
+        public async Task<IActionResult> EditCustomer(CustomerDto editCustomer)
         {
-            var customer = new CustomerDto();
+            var result = await _customerManagementClient.EditCustomerAsync(editCustomer);
+
+            return RedirectToAction("Index", "Customer", new { area = "" });
+        }
+
+        public async Task<IActionResult> Delete(int customerId)
+        {
+            var customer = await _customerManagementClient.GetCustomerAsync(customerId);
 
             return View(customer);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteCustomer(CustomerDto deleteCustomer)
+        {
+            var result = await _customerManagementClient.DeleteCustomerAsync(deleteCustomer.Id);
+
+            return RedirectToAction("Index", "Customer", new { area = "" });
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

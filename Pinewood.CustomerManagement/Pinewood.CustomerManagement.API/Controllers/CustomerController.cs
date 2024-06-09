@@ -35,9 +35,15 @@ namespace Pinewood.CustomerManagement.API.Controllers
         }
 
         [HttpDelete]
-        public bool DeleteCustomer(int customerId)
+        public bool DeleteCustomer([FromQuery] int customerId)
         {            
             return _customerManagementService.DeleteCustomer(customerId);
+        }
+
+        [HttpGet]
+        public CustomerDto? GetCustomer([FromQuery] int customerId)
+        {
+            return _customerManagementService.GetCustomer(customerId);
         }
     }
 }

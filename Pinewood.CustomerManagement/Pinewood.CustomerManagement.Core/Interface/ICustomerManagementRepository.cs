@@ -11,5 +11,7 @@ namespace Pinewood.CustomerManagement.Core.Interface
         bool AddCustomer(Customer addCustomer);
 
         bool DeleteCustomer(int customerId);
+
+        Customer? GetCustomer(int customerId);
     }
 }

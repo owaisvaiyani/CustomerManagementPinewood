@@ -91,5 +91,31 @@ namespace Pinewood.CustomerManagement.API.Services
 
             return resultCustomers;
         }
+
+        public CustomerDto? GetCustomer(int customerId) 
+        {
+            _logger.LogInformation("Starting GetCustomer");
+
+            try
+            {
+                var customer = _customerManagementRepository.GetCustomer(customerId);
+
+                if (customer != null) 
+                {
+                    var customerDto = new CustomerDto();
+                    customerDto.Id = customer.Id;
+                    customerDto.Name = customer.Name;
+                    customerDto.Email = customer.Email;
+
+                    return customerDto;
+                }                
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Exception: " + ex);
+            }
+
+            return null;
+        }
     }
 }
