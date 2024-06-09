@@ -1,3 +1,13 @@
+TODO:
+Add Email validation
+Add more unit test coverage
+Add security on API
+
+
+
+Customer Table
+----------------------
+
 USE [ntfirewall_]
 GO
 
